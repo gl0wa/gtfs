@@ -36,7 +36,8 @@ module GTFS
     def extract_to_cache(source_path)
       Zip::ZipFile.open(source_path) do |zip|
         zip.entries.each do |entry|
-          zip.extract(entry.name, File.join(@tmp_dir, '/', entry.name))
+          fileName = entry.name.split('/').last
+          zip.extract(entry.name, File.join(@tmp_dir, '/', fileName))
         end
       end
     end
